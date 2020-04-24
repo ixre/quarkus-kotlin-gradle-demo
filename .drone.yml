@@ -13,11 +13,11 @@ steps:
         path: /cache
     settings:
       restore: true
-      mount: ["/drone/.gradle"]
+      mount: ["./gradle"]
   - name: build
     image: gradle
     commands:
-      - gradle quarkusBuild -g /drone/.gradle --info --build-cache --parallel
+      - gradle quarkusBuild -g /cache/gradle --info --build-cache --parallel
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
@@ -25,7 +25,7 @@ steps:
         path: /cache
     settings:
       rebuild: true
-      mount: ["/drone/.gradle"]
+      mount: ["./gradle"]
   - name: docker
     image: plugins/docker
     settings:

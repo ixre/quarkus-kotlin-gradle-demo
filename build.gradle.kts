@@ -11,8 +11,8 @@ allOpen {
 }
 
 repositories {
-    mavenCentral()
     maven("http://maven.aliyun.com/nexus/content/groups/public/")
+    mavenCentral()
 }
 
 dependencies {

@@ -18,7 +18,7 @@ COPY build/lib ./lib
 #RUN apt-get update && apt-get install -y libfontconfig1  && \
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
     apk add tzdata fontconfig ttf-dejavu && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    apk remove tzdata && \
+    apk del tzdata && \
     echo "if [ ! -f '/data/app.conf' ];then cp /app/app.conf /data/;fi;"\
     "java -Djava.security.egd=file:/dev/./urandom -jar *-runner.jar -Dconf /data/app.conf"> /docker-boot.sh
 

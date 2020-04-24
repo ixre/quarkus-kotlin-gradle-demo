@@ -2,10 +2,10 @@ kind: pipeline
 name: default
 
 steps:
-  - name: "gradle-assemble"
-      image: gradle
-      commands:
-        - gradle quarkusBuild --build-cache --parallel
+  - name: gradle-assemble
+    image: gradle
+    commands:
+      - gradle quarkusBuild --build-cache --parallel
   - name: docker
     image: plugins/docker
     settings:

@@ -8,15 +8,14 @@ volumes: # 定义主机的存储分卷
 steps:
   - name: restore-cache
     image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
+    volumes: /tmp/cache:/cache
     settings:
       restore: true
-      mount:
-        - ~/.gradle
+      mount: ["/drone/.gradle"]
   - name: gradle-assemble
     image: gradle
+    environment:
+      - GRADLE_USER_HOME=/drone/.gradle
     commands:
       - gradle quarkusBuild --build-cache --parallel
   - name: docker
@@ -33,13 +32,10 @@ steps:
         from_secret: docker_password
   - name: rebuild-cache
     image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
+    volumes: /tmp/cache:/cache
     settings:
       rebuild: true
-      mount:
-        - ~/.gradle
+      mount: ["/drone/.gradle"]
   - name: publish
     image: appleboy/drone-ssh
     settings:

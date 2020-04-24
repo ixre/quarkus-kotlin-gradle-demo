@@ -9,7 +9,7 @@ steps:
   - name: restore-cache
     image: drillster/drone-volume-cache
     volumes:
-      - /tmp/cache:/cache
+      - "/tmp/cache:/cache"
     settings:
       restore: true
       mount: ["/drone/.gradle"]

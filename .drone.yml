@@ -17,7 +17,7 @@ steps:
   - name: build
     image: gradle
     commands:
-      - gradle quarkusBuild -g /cache/gradle --info --build-cache --parallel
+      - gradle quarkusBuild -g ./gradle --info --build-cache --parallel
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:

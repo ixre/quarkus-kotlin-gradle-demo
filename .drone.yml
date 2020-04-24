@@ -14,10 +14,10 @@ steps:
     settings:
       restore: true
       mount: ["/drone/.gradle"]
-  - name: gradle-assemble
+  - name: build
     image: gradle
     commands:
-      - GRADLE_USER_HOME=/drone/.gradle && gradle quarkusBuild --build-cache --parallel
+      - gradle quarkusBuild -g /drone/.gradle --info --build-cache --parallel
   - name: docker
     image: plugins/docker
     settings:

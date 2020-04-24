@@ -18,6 +18,14 @@ steps:
     image: gradle
     commands:
       - gradle quarkusBuild -g /drone/.gradle --info --build-cache --parallel
+  - name: rebuild-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      rebuild: true
+      mount: ["/drone/.gradle"]
   - name: docker
     image: plugins/docker
     settings:
@@ -30,14 +38,6 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-  - name: rebuild-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: cache
-        path: /cache
-    settings:
-      rebuild: true
-      mount: ["/drone/.gradle"]
   - name: publish
     image: appleboy/drone-ssh
     settings:

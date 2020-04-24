@@ -1,0 +1,35 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: gradle assemble
+      image: gradle
+      commands:
+        - gradle quarkusBuild --build-cache --parallel
+  - name: docker
+    image: plugins/docker
+    settings:
+      repo: docker-base.meizhuli.net:5020/mzl-board
+      tags: latest
+      registry: docker-base.meizhuli.net:5020
+      insecure: true
+      debug: false
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+  - name: publish
+    image: appleboy/drone-ssh
+    settings:
+      host: mzl-nightly.ns.meizhuli.net
+      username: root
+      password:
+        from_secret: server_password
+      port: 22
+      script:
+        - cd /data/mzl-nightly
+        - docker-compose pull && docker-compose down && docker-compose up -d
+trigger:
+  branch:
+    - master
+    - feature

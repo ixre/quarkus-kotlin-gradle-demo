@@ -19,6 +19,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("io.quarkus:quarkus-kotlin:1.4.0.Final")
     implementation("io.quarkus:quarkus-resteasy:1.4.0.Final")
+    implementation("com.moandjiezana.toml:toml4j:0.7.2")
     testImplementation("io.quarkus:quarkus-junit5:1.4.0.Final")
 }
 tasks.withType<Test> {
@@ -29,9 +30,8 @@ tasks.getByName("classes") {
     doLast {
         println("start copy some files...")
         copy{
-            from("./app.conf")
-            into("$buildDir")
-            include( "**/*.conf","*.conf")
+            from("./config/application.properties")
+            into("$buildDir/config")
         }
         // 外置Jar包
         copy {

@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 steps:
-  - name: gradle assemble
+  - name: gradle-assemble
       image: gradle
       commands:
         - gradle quarkusBuild --build-cache --parallel

@@ -1,7 +1,7 @@
 kind: pipeline
 name: default
 
-volumes: # 定义主机的存储分卷
+volumes:
   - name: cache
     host:
       path: /tmp/cache
@@ -15,7 +15,7 @@ steps:
       restore: true
       mount: ["./gradle"]
   - name: build
-    image: gradle
+    image: gradle:jdk14
     commands:
       - gradle quarkusBuild -g ./gradle --info --build-cache --parallel
   - name: rebuild-cache

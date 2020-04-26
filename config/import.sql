@@ -1,0 +1,1 @@
+-- execute query at app started..

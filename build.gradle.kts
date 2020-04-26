@@ -1,5 +1,3 @@
-
-
 plugins{
     java
     kotlin("jvm") version ("1.3.72")
@@ -17,10 +15,14 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("io.quarkus:quarkus-kotlin:1.4.0.Final")
-    implementation("io.quarkus:quarkus-resteasy:1.4.0.Final")
+    implementation("io.quarkus:quarkus-kotlin:1.4.1.Final")
+    implementation("io.quarkus:quarkus-resteasy:1.4.1.Final")
+    implementation("io.quarkus:quarkus-agroal:1.4.1.Final")
+    implementation("io.quarkus:quarkus-jdbc-mariadb:1.4.1.Final")
+    implementation("io.quarkus:quarkus-hibernate-orm:1.4.1:Final")
+    implementation("io.quarkus:quarkus-hibernate-orm-panache:1.4.1:Final")
     implementation("com.moandjiezana.toml:toml4j:0.7.2")
-    testImplementation("io.quarkus:quarkus-junit5:1.4.0.Final")
+    testImplementation("io.quarkus:quarkus-junit5:1.4.1.Final")
 }
 tasks.withType<Test> {
     useJUnitPlatform()

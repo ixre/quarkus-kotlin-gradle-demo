@@ -38,6 +38,7 @@ class CusFollowLogService {
             } else {
                 dst = CusFollowLogEntity()
             }
+
             dst.id = e.id
             dst.createdTime = e.createdTime
             dst.cusId = e.cusId

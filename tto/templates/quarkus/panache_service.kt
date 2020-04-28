@@ -11,7 +11,8 @@ package {{pkg "java" .global.Pkg}}.service
 
 import {{pkg "java" .global.Pkg}}.pojo.{{.table.Title}}Entity
 import {{pkg "java" .global.Pkg}}.repo.{{.table.Title}}JpaRepository
-import com.google.inject.Inject
+import javax.inject.Inject
+import javax.enterprise.inject.Defaultd
 import javax.enterprise.context.ApplicationScoped
 import com.line.arch.commons.std.catch
 import com.line.arch.commons.std.TypesConv
@@ -23,10 +24,10 @@ import com.line.arch.commons.std.TypesConv
 /** {{.table.Comment}}服务  */
 @ApplicationScoped
 class {{.table.Title}}Service {
-    @Inject
+    @Inject@field:Default
     lateinit var repo: {{$tableTitle}}JpaRepository
 
-    fun parseId(id:Int):Long{return TypesConv.toLong(id)}
+    fun parseId(id:Any):Long{return TypesConv.toLong(id)}
 
     // 根据ID查找{{.table.Comment}}
     fun findByIdOrNull(id:{{$pkType}}):{{$tableTitle}}Entity?{

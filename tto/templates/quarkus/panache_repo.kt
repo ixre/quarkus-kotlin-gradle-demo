@@ -16,6 +16,6 @@ import javax.enterprise.context.ApplicationScoped
 {{$pkType := type "kotlin" .table.PkTypeId}}
 /** {{.table.Comment}}仓储接口  */
 @ApplicationScoped
-interface {{.table.Title}}JpaRepository : PanacheRepository<{{.table.Title}}Entity> {
+class {{.table.Title}}JpaRepository : PanacheRepository<{{.table.Title}}Entity> {
 
 }

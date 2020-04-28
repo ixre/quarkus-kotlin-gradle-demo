@@ -15,6 +15,6 @@ import javax.enterprise.context.ApplicationScoped
 
 /** ¿Í»§»Ø·Ã¼ÇÂ¼仓储接口  */
 @ApplicationScoped
-interface CusFollowLogJpaRepository : PanacheRepository<CusFollowLogEntity> {
+class CusFollowLogJpaRepository : PanacheRepository<CusFollowLogEntity> {
 
 }

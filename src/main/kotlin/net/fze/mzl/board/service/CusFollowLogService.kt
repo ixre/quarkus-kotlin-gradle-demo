@@ -11,18 +11,19 @@ package net.fze.mzl.board.service
 
 import net.fze.mzl.board.pojo.CusFollowLogEntity
 import net.fze.mzl.board.repo.CusFollowLogJpaRepository
-import com.google.inject.Inject
 import javax.enterprise.context.ApplicationScoped
 import com.line.arch.commons.std.catch
 import com.line.arch.commons.std.TypesConv
+import javax.enterprise.inject.Default
+import javax.inject.Inject
 
 /** ¿Í»§»Ø·Ã¼ÇÂ¼服务  */
 @ApplicationScoped
 class CusFollowLogService {
-    @Inject
+    @Inject@field:Default
     lateinit var repo: CusFollowLogJpaRepository
 
-    fun parseId(id:Int):Long{return TypesConv.toLong(id)}
+    fun parseId(id:Any):Long{return TypesConv.toLong(id)}
 
     // 根据ID查找¿Í»§»Ø·Ã¼ÇÂ¼
     fun findByIdOrNull(id:Int):CusFollowLogEntity?{

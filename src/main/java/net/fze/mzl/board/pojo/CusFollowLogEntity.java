@@ -22,8 +22,8 @@ import javax.persistence.GeneratedValue;
 @Table(name = "cus_follow_log", schema = "")
 public class CusFollowLogEntity {
 
-    private int id;
-    public void setId(int id){
+    private long id;
+    public void setId(long id){
         this.id = id;
     }
 
@@ -31,7 +31,7 @@ public class CusFollowLogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" ,length = 11)
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 

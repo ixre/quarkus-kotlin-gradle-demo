@@ -11,18 +11,22 @@ MAINTAINER jarrysix
 LABEL vendor="yq"
 LABEL version="1.0.0"
 
+WORKDIR /data
+COPY build/*.conf build/config ./
 WORKDIR /app
-COPY build/*.jar build/*.conf ./
+COPY build/*.jar ./
 COPY build/lib ./lib
 
 #RUN apt-get update && apt-get install -y libfontconfig1  && \
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
     apk add tzdata fontconfig ttf-dejavu && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     apk del tzdata && \
-    echo "if [ ! -f '/data/app.conf' ];then cp /app/app.conf /data/;fi;"\
-    "java -Djava.security.egd=file:/dev/./urandom -jar *-runner.jar -Dconf /data/app.conf"> /docker-boot.sh
+    echo "if [ ! -f '/app/config/application.properties' ];"\
+         "then cp -r /data/application.properties /app/config;fi;"\
+         "java -Djava.security.egd=file:/dev/./urandom -jar *-runner.jar"\
+         " -Dconf /app/application.properties"> /docker-boot.sh
 
-VOLUME ["/data","/app/upload"]
+VOLUME ["/app/config","/app/upload"]
 EXPOSE 8080
 
 ENTRYPOINT ["sh","/docker-boot.sh"]

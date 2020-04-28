@@ -31,6 +31,13 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+tasks.create("generate").doFirst {
+    exec{
+        workingDir("./tto")
+        commandLine("sh","-c","./tto.sh")
+    }
+}
+
 tasks.getByName("classes") {
     doLast {
         println("start copy some files...")

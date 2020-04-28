@@ -1,33 +1,37 @@
-package net.fze.mzl.board.resources
+#target!kotlin/{{.global.Pkg}}/resources/{{.table.Title}}Resource.kt.gen
+package {{pkg "java" .global.Pkg}}.resources
 
+import {{pkg "java" .global.Pkg}}.pojo.{{.table.Title}}Entity
+import {{pkg "java" .global.Pkg}}.service.{{.table.Title}}Service
 import com.line.arch.commons.std.Result
-import net.fze.mzl.board.pojo.CusFollowLogEntity
-import net.fze.mzl.board.service.CusFollowLogService
 import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 
+{{$tableTitle := .table.Title}}
 
-@Path("/cus")
+/* {{.table.Comment}}资源 */
+@Path("/{{.table.Name}}")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-class CusFlowResource {
+class {{.table.Title}}Resource {
     @Inject
-    lateinit var service:CusFollowLogService
+    private lateinit var service:{{.table.Title}}Service
+
     @GET
     @Path("/{id}")
-    fun hello(@PathParam("id") id:Int): CusFollowLogEntity? {
+    fun get(@PathParam("id") id:Int): {{.table.Title}}Entity? {
         return service.findByIdOrNull(id)
     }
 
     @GET
-    fun list(): Set<CusFollowLogEntity> {
+    fun list(): Set<{{.table.Title}}Entity> {
         return mutableSetOf()
     }
 
     @POST
-    fun add(entity: CusFollowLogEntity):Result {
-        val err = this.service.saveCusFollowLog(entity)
+    fun save(entity: {{.table.Title}}Entity):Result {
+        val err = this.service.save{{.table.Title}}(entity)
         if(err != null)return Result.create(1,err.message)
         return Result.OK
     }

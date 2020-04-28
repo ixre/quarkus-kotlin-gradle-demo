@@ -12,7 +12,7 @@ package {{pkg "java" .global.Pkg}}.service
 import {{pkg "java" .global.Pkg}}.pojo.{{.table.Title}}Entity
 import {{pkg "java" .global.Pkg}}.repo.{{.table.Title}}JpaRepository
 import javax.inject.Inject
-import javax.enterprise.inject.Defaultd
+import javax.enterprise.inject.Default
 import javax.enterprise.context.ApplicationScoped
 import com.line.arch.commons.std.catch
 import com.line.arch.commons.std.TypesConv
@@ -56,8 +56,10 @@ class {{.table.Title}}Service {
     }
 
     // 删除{{.table.Comment}}
-    fun deleteById(id:{{$pkType}}) {
-         this.repo.deleteById(this.parseId(id))
+    fun deleteById(id:{{$pkType}}):Error? {
+        return catch {
+            this.repo.deleteById(this.parseId(id))
+        }.error()
     }
 
 }

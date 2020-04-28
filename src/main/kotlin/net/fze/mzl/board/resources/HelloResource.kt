@@ -1,4 +1,4 @@
-package net.fze.mzl.board.Resources
+package net.fze.mzl.board.resources
 
 import com.google.inject.Inject
 import io.agroal.api.AgroalDataSource

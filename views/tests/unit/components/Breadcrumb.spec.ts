@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils'
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
-import i18n from '@/lang' // Internationalization
+import i18n from 'src/lang' // Internationalization
 
 const localVue = createLocalVue()
 localVue.use(VueRouter)

@@ -19,6 +19,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@/settings": [
+        "src/settings"
       ]
     },
     "lib": [

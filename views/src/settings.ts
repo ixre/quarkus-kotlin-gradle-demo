@@ -8,6 +8,7 @@ interface ISettings {
   sidebarTextTheme: boolean // If true, will change active text color for sidebar based on theme
   devServerPort: number // Port number for webpack-dev-server
   mockServerPort: number // Port number for mock server
+  appBaseApiPath:string //
 }
 
 // You can customize below settings :)
@@ -20,7 +21,10 @@ const settings: ISettings = {
   errorLog: ['production'],
   sidebarTextTheme: true,
   devServerPort: 9527,
-  mockServerPort: 9528
+  mockServerPort: 9528,
+  appBaseApiPath:process.env.NODE_ENV === 'development'?
+      "http://localhost:8080":
+      process.env.VUE_APP_BASE_API||""
 }
 
 export default settings

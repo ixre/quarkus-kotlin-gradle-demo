@@ -18,6 +18,7 @@ import '@/utils/error-log'
 import '@/pwa/register-service-worker'
 import * as directives from '@/directives'
 import * as filters from '@/filters'
+import {RequestMixin} from "@/views/mixins";
 
 Vue.use(ElementUI, {
   size: AppModule.size, // Set element-ui default size
@@ -41,10 +42,15 @@ Object.keys(filters).forEach(key => {
 })
 
 Vue.config.productionTip = false
+if(process.env.NODE_ENV === 'development'){
+  console.log("----dev")
+}
+
 
 new Vue({
   router,
   store,
   i18n,
+  mixins:[RequestMixin],
   render: (h) => h(App)
 }).$mount('#app')

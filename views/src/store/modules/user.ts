@@ -54,7 +54,7 @@ class User extends VuexModule implements IUserState {
     this.email = email
   }
 
-  @Action
+  @Action({ rawError: true })
   public async Login(userInfo: { username: string, password: string}) {
     let { username, password } = userInfo
     username = username.trim()
@@ -75,7 +75,7 @@ class User extends VuexModule implements IUserState {
     if (this.token === '') {
       throw Error('GetUserInfo: token is undefined!')
     }
-    const { data } = await getUserInfo({ /* Your params here */ })
+    const { data } = await getUserInfo({/* Your params here */ })
     if (!data) {
       throw Error('Verification failed, please Login again.')
     }

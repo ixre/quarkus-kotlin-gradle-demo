@@ -19,7 +19,7 @@ steps:
     commands:
       - cd views
       - npm install && npm run build
-      - mv dist/* ../src/main/resources/META-INF/resources/app/
+      - mv dist ../src/main/resources/META-INF/resources/app
   - name: build
     image: gradle:jdk14
     commands:

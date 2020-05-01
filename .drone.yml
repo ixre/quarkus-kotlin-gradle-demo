@@ -14,7 +14,7 @@ steps:
     settings:
       restore: true
       mount: ["./gradle","./node_modules"]
-  - webpack:
+  - name: webpack
     image: node
     commands:
       - cd views

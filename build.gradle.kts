@@ -6,6 +6,7 @@ plugins{
 }
 allOpen {
     annotation("javax.enterprise.context.ApplicationScoped")
+    annotation("javax.enterprise.context.RequestScoped")
 }
 
 repositories {

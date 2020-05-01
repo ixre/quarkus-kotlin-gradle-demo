@@ -4,7 +4,7 @@
   "private": true,
   "author": "Chong Guo <armourcy@gmail.com>",
   "scripts": {
-    "start": "vue-cli-service serve -env.VUE_APP_BASE_API=http://localhost:8080",
+    "start": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
     "build:stage": "vue-cli-service build --mode staging",
     "mock": "cd mock && ts-node-dev mock-server.ts",

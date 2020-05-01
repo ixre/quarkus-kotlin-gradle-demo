@@ -15,11 +15,11 @@ steps:
       restore: true
       mount: ["./gradle","./node_modules"]
   - name: webpack
-    image: node
+    image: node:alpine
     commands:
       - cd views
       - npm install && npm run build
-      - mv dist/* ../src/main/resources/app
+      - mv dist/* ../src/main/resources/META-INF/resources/app/
   - name: build
     image: gradle:jdk14
     commands:

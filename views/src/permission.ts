@@ -24,7 +24,6 @@ const getPageTitle = (key: string) => {
 router.beforeEach(async(to: Route, _: Route, next: any) => {
   // Start progress bar
   NProgress.start()
-
   // Determine whether the user has logged in
   if (UserModule.token) {
     if (to.path === '/login') {
@@ -46,6 +45,7 @@ router.beforeEach(async(to: Route, _: Route, next: any) => {
           // Set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
+          console.log("---",err);
           // Remove token and redirect to login page
           UserModule.ResetToken()
           Message.error(err || 'Has Error')

@@ -63,14 +63,14 @@ class User extends VuexModule implements IUserState {
     this.SET_TOKEN(data.accessToken)
   }
 
-  @Action
+  @Action({ rawError: true })
   public ResetToken() {
     removeToken()
     this.SET_TOKEN('')
     this.SET_ROLES([])
   }
 
-  @Action
+  @Action({ rawError: true })
   public async GetUserInfo() {
     if (this.token === '') {
       throw Error('GetUserInfo: token is undefined!')
@@ -79,6 +79,7 @@ class User extends VuexModule implements IUserState {
     if (!data) {
       throw Error('Verification failed, please Login again.')
     }
+    console.log("---",data);
     const { roles, name, avatar, introduction, email } = data.user
     // roles must be a non-empty array
     if (!roles || roles.length <= 0) {

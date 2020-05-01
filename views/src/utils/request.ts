@@ -15,6 +15,7 @@ service.interceptors.request.use(
         // Add X-Access-Token header to every request, you can add other custom headers here
         if (UserModule.token) {
             config.headers['X-Access-Token'] = UserModule.token
+            config.headers["Authorization"] = "Bearer "+UserModule.token
         }
         return config
     },
@@ -60,10 +61,12 @@ service.interceptors.response.use(
         return response;
     },
     (error) => {
+        let {message} = error;
+        if (message.indexOf("401")) message = "无权访问"
         Message({
-            message: error.message,
+            message: message,
             type: 'error',
-            duration: 5 * 1000
+            duration: 5000
         })
         return Promise.reject(error)
     }

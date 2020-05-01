@@ -1,9 +1,10 @@
 package net.fze.mzl.board.resources
 
-import com.line.arch.commons.std.Typed
 import net.fze.mzl.board.models.vue.UserModel
+import net.fze.mzl.board.util.jwt.TokenUtils
 import org.eclipse.microprofile.jwt.JsonWebToken
 import javax.annotation.security.PermitAll
+import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
 import javax.enterprise.inject.Default
 import javax.inject.Inject
@@ -17,24 +18,35 @@ import javax.ws.rs.core.SecurityContext
 
 
 @Path("/users")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped // 添加注解
 class UsersResource {
-    @Inject
-    @field:Default
-    lateinit var jwt: JsonWebToken // 注入jwt
+    @Inject lateinit var jwt: JsonWebToken // 注入jwt
 
     @POST
     @Path("/login")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     fun login(entity: Map<String, String>): Map<String, String> {
-        return mutableMapOf("accessToken" to Typed.encoder.md5("12346".toByteArray()));
+        val pemPath = "/META-INF/private_key.pem"
+        val claims = mutableMapOf<String,Any>()
+        claims["iss"] = "https://quarkus.io/using-jwt-rbac"
+        claims["upn"] = "user1"
+        claims["aud"] = "using-jwt-rbac"
+        claims["preferred_username"] = "admin"
+        claims["roleMappings"] = mutableMapOf( "group1" to "Group1MappedRole",
+        "group2" to "Group2MappedRole")
+        claims["groups"] = mutableListOf("Admin","Guest","group2")
+        val token = TokenUtils.generateTokenString(pemPath,"",
+                claims,300)
+        return mutableMapOf("accessToken" to token);
     }
 
     @POST
     @Path("/info")
-    @PermitAll
-    fun info(@Context ctx: SecurityContext):UserModel {
+    //@PermitAll
+    @RolesAllowed("group2")
+    fun info(@Context ctx: SecurityContext):Map<String,Any> {
+        val mp = mutableMapOf<String,Any>()
         val user = UserModel()
         user.username = ctx.userPrincipal?.name ?: ""
         user.password = ""
@@ -45,7 +57,14 @@ class UsersResource {
         user.phone = ""
         user.roles.add("admin")
         user.roles.add("master")
-        return user
+        mp["user"] = user
+        return mp
+    }
+
+    @POST
+    @Path("/logout")
+    fun logout():String{
+        return "ok"
     }
 }
 

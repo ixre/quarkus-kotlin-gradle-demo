@@ -18,7 +18,7 @@ steps:
     image: node
     commands:
       - cd views
-      - npm run build
+      - npm install && npm run build
       - mv dist/* ../src/main/resources/app
   - name: build
     image: gradle:jdk14

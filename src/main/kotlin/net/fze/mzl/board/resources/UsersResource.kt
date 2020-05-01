@@ -37,7 +37,7 @@ class UsersResource {
         "group2" to "Group2MappedRole")
         claims["groups"] = mutableListOf("Admin","Guest","group2")
         val token = TokenUtils.generateTokenString(pemPath,"",
-                claims,300)
+                claims,1800)
         return mutableMapOf("accessToken" to token);
     }
 

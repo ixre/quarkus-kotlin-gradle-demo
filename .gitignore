@@ -21,3 +21,5 @@ node_modules
 My*Test.kt
 *.log
 frontend
+/src/main/resources/META-INF/resources/app/
+/views/dist/

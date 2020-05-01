@@ -13,7 +13,13 @@ steps:
         path: /cache
     settings:
       restore: true
-      mount: ["./gradle"]
+      mount: ["./gradle","./node_modules"]
+  - webpack:
+    image: node
+    commands:
+      - cd views
+      - npm run build
+      - mv dist/* ../src/main/resources/app
   - name: build
     image: gradle:jdk14
     commands:
@@ -25,7 +31,7 @@ steps:
         path: /cache
     settings:
       rebuild: true
-      mount: ["./gradle"]
+      mount: ["./gradle","./node_modules"]
   - name: docker
     image: plugins/docker
     settings:

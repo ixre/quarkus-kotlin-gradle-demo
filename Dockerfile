@@ -5,7 +5,7 @@
 # Uasge:
 # docker run -it --name service -p 8080:8080 -v $(pwd)/data:/data service:latest
 
-FROM adoptopenjdk:14-jre-openj9
+FROM adoptopenjdk/openjdk14-openj9:alpine-jre
 
 MAINTAINER jarrysix
 LABEL vendor="yq"

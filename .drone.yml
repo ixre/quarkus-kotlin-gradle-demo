@@ -15,7 +15,7 @@ steps:
       restore: true
       mount: ["./gradle","./node_modules"]
   - name: webpack
-    image: node:alpine
+    image: node
     commands:
       - cd views
       - npm install && npm run build

@@ -40,6 +40,10 @@ tasks.create("generate").doFirst {
     }
 }
 
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs = listOf("-Xdoclint:none", "-Xlint:none", "-nowarn")
+}
+
 tasks.getByName("classes") {
     doLast {
         println("start copy some files...")

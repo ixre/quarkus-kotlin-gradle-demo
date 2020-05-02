@@ -23,7 +23,7 @@ steps:
   - name: build
     image: gradle:jdk14
     commands:
-      - gradle quarkusBuild -g ./gradle --info --build-cache --parallel
+      - gradle quarkusBuild -g ./gradle --info --scan --build-cache --parallel -Dorg.gradle.jvmargs=-Xmx256m
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
